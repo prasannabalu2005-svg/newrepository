@@ -1,0 +1,6 @@
+projectKey=gohan
+serverUrl=http://localhost:9090
+serverVersion=9.9.8.100196
+dashboardUrl=http://localhost:9090/dashboard?id=gohan
+ceTaskId=AZ8mBZNyipuWiDNVblRq
+ceTaskUrl=http://localhost:9090/api/ce/task?id=AZ8mBZNyipuWiDNVblRq

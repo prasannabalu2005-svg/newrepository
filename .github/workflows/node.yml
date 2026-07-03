@@ -1,6 +1,7 @@
+
 name: Basic Node pipeline
 
-on: 
+on:
   workflow_dispatch:
 
 jobs:
@@ -11,11 +12,11 @@ jobs:
       - name: Clone code
         uses: actions/checkout@v4
 
-      - name: Node install
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 24
-        
+
       - name: Install Dependencies
         run: npm install
 
@@ -26,3 +27,22 @@ jobs:
           curl http://localhost:8080
           curl http://localhost:8080/health
           pkill -f "node app.js"
+
+  docker:
+    needs: node
+    runs-on: [self-hosted, wsl-prasanna]
+
+    environment:
+      name: production
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Docker Build Tag Push
+        uses: ./.github/actions/docker-build-push
+        with:
+          docker_username: ${{ secrets.DOCKER_USERNAME }}
+          docker_token: ${{ secrets.DOCKER_TOKEN }}
+          image_name: gohan-app
+          image_tag: latest

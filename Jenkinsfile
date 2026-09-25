@@ -15,6 +15,8 @@ parameters {
         stage('Build') {
             steps {
                 echo 'Jenkins connected to GitHub!'
+                    echo "Selected Environment: $
+                    {params.ENVIRONMENT}"
                 sh 'npm install'
             }
         }

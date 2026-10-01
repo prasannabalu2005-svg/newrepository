@@ -33,6 +33,11 @@ parameters {
                 sh 'docker build -t vehicle-spareparts:latest .'
             }
         }
+            stage('Approval') {
+    steps {
+        input message: 'Do you want to push the Docker image?', ok: 'Proceed'
+    }
+}
 
         stage('Docker Hub Push') {
             steps {
